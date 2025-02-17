@@ -9,7 +9,7 @@ function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('https://example.com/api', { name });
+      const response = await axios.post('https://test3-gustavocc.purplemoss-92287ba4.westeurope.azurecontainerapps.io', { name });
       setMessage(`Response: ${response.data.message}`);
     } catch (error) {
       console.error('Error posting name:', error);
