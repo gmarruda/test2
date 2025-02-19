@@ -51,16 +51,23 @@ function App() {
     setCurrentTime(newTime);
   };
 
+  const handleEnded = () => {
+    setIsPlaying(false);
+    setCurrentTime(0);
+  };
+
   useEffect(() => {
     const audioElement = audioRef.current;
     if (audioElement) {
       audioElement.addEventListener('timeupdate', handleTimeUpdate);
       audioElement.addEventListener('loadedmetadata', handleLoadedMetadata);
+      audioElement.addEventListener('ended', handleEnded);
     }
     return () => {
       if (audioElement) {
         audioElement.removeEventListener('timeupdate', handleTimeUpdate);
         audioElement.removeEventListener('loadedmetadata', handleLoadedMetadata);
+        audioElement.removeEventListener('ended', handleEnded);
       }
     };
   }, []);
