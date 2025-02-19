@@ -3,35 +3,40 @@ import axios from 'axios';
 import './App.css';
 
 function App() {
-  const [name, setName] = useState('');
-  const [message, setMessage] = useState('');
+  const [text, setText] = useState('');
+  const [audioUrl, setAudioUrl] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('https://api.gustavo.cc/test3/', { name });
-      setMessage(`Response: ${response.data.message}`);
+      const response = await axios.post('https://test4.gustavo.cc', { text }, { responseType: 'blob' });
+      const audioBlob = new Blob([response.data], { type: 'audio/wav' });
+      const audioUrl = URL.createObjectURL(audioBlob);
+      setAudioUrl(audioUrl);
     } catch (error) {
-      console.error('Error posting name:', error);
-      setMessage('An error occurred.');
+      console.error('Error posting text:', error);
     }
   };
 
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Enter Your Name</h1>
+        <h1>Entre com o texto a ser falado:</h1>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Enter your name"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Digite o texto aqui"
             required
           />
-          <button type="submit">Submit</button>
+          <button type="submit">Enviar</button>
         </form>
-        {message && <p>{message}</p>}
+        {audioUrl && (
+          <div>
+            <button onClick={() => new Audio(audioUrl).play()}>▶️ Play</button>
+          </div>
+        )}
       </header>
     </div>
   );
