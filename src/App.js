@@ -6,6 +6,7 @@ function App() {
   const [text, setText] = useState('');
   const [audioUrl, setAudioUrl] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [displayText, setDisplayText] = useState(''); // New state for displaying text
   const audioRef = useRef(null);
 
   const handleSubmit = async (event) => {
@@ -17,7 +18,8 @@ function App() {
       const audioBlob = new Blob([response.data], { type: 'audio/wav' });
       const audioUrl = URL.createObjectURL(audioBlob);
       setAudioUrl(audioUrl);
-      setText('');
+      setDisplayText(text); // Set the display text
+      setText(''); // Clear the input text box
     } catch (error) {
       console.error('Error posting text:', error);
     } finally {
@@ -57,7 +59,7 @@ function App() {
           <div>
             <audio ref={audioRef} src={audioUrl} />
             <button onClick={handlePlay}>▶️ Play</button>
-            <p style={{ textAlign: 'center' }}>{text}</p>
+            <p style={{ textAlign: 'center' }}>{displayText}</p> {/* Display the text */}
           </div>
         )}
       </header>
