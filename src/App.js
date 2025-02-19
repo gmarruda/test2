@@ -9,7 +9,7 @@ function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('https://test4.gustavo.cc', { text }, { responseType: 'blob' });
+      const response = await axios.post('https://api.gustavo.cc/test4', { text }, { responseType: 'blob' });
       const audioBlob = new Blob([response.data], { type: 'audio/wav' });
       const audioUrl = URL.createObjectURL(audioBlob);
       setAudioUrl(audioUrl);
