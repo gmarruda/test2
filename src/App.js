@@ -6,9 +6,6 @@ function App() {
   const [text, setText] = useState('');
   const [audioUrl, setAudioUrl] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
   const audioRef = useRef(null);
 
   const handleSubmit = async (event) => {
@@ -28,48 +25,17 @@ function App() {
     }
   };
 
-  const handlePlayPause = () => {
-    if (isPlaying) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play();
-    }
-    setIsPlaying(!isPlaying);
-  };
-
-  const handleTimeUpdate = () => {
-    setCurrentTime(audioRef.current.currentTime);
-  };
-
-  const handleLoadedMetadata = () => {
-    setDuration(audioRef.current.duration);
-  };
-
-  const handleProgressChange = (event) => {
-    const newTime = (event.target.value / 100) * duration;
-    audioRef.current.currentTime = newTime;
-    setCurrentTime(newTime);
-  };
-
-  const handleEnded = () => {
-    setIsPlaying(false);
-    setCurrentTime(0);
+  const handlePlay = () => {
+    audioRef.current.play();
   };
 
   useEffect(() => {
     const audioElement = audioRef.current;
     if (audioElement) {
-      audioElement.addEventListener('timeupdate', handleTimeUpdate);
-      audioElement.addEventListener('loadedmetadata', handleLoadedMetadata);
-      audioElement.addEventListener('ended', handleEnded);
+      audioElement.addEventListener('ended', () => {
+        audioElement.currentTime = 0;
+      });
     }
-    return () => {
-      if (audioElement) {
-        audioElement.removeEventListener('timeupdate', handleTimeUpdate);
-        audioElement.removeEventListener('loadedmetadata', handleLoadedMetadata);
-        audioElement.removeEventListener('ended', handleEnded);
-      }
-    };
   }, []);
 
   return (
@@ -90,20 +56,7 @@ function App() {
         {audioUrl && (
           <div>
             <audio ref={audioRef} src={audioUrl} />
-            <button onClick={handlePlayPause}>
-              {isPlaying ? '⏸️ Pause' : '▶️ Play'}
-            </button>
-            <div>
-              <input
-                type="range"
-                value={(currentTime / duration) * 100 || 0}
-                onChange={handleProgressChange}
-              />
-              <div>
-                {Math.floor(currentTime / 60)}:{Math.floor(currentTime % 60).toString().padStart(2, '0')} / 
-                {Math.floor(duration / 60)}:{Math.floor(duration % 60).toString().padStart(2, '0')}
-              </div>
-            </div>
+            <button onClick={handlePlay}>▶️ Play</button>
             <p style={{ textAlign: 'center' }}>{text}</p>
           </div>
         )}
