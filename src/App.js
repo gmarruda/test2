@@ -9,8 +9,8 @@ function App() {
   const [displayText, setDisplayText] = useState(''); // New state for displaying text
   const audioRef = useRef(null);
 
-  const apiEndpoint = process.env.api-endpoint;
-  const apiKey = process.env.api-key;
+  const apiEndpoint = process.env.api_endpoint;
+  const apiKey = process.env.api_key;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
