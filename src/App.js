@@ -9,12 +9,20 @@ function App() {
   const [displayText, setDisplayText] = useState(''); // New state for displaying text
   const audioRef = useRef(null);
 
+  const apiEndpoint = process.env.api-endpoint;
+  const apiKey = process.env.api-key;
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
     setAudioUrl(null);
     try {
-      const response = await axios.post('https://api.gustavo.cc/tts', { text }, { responseType: 'blob' });
+      const response = await axios.post(apiEndpoint, { text }, {
+        responseType: 'blob',
+        headers: {
+          'Ocp-Apim-Subscription-Key': apiKey
+        }
+      });
       const audioBlob = new Blob([response.data], { type: 'audio/wav' });
       const audioUrl = URL.createObjectURL(audioBlob);
       setAudioUrl(audioUrl);
