@@ -19,10 +19,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "env": {
-    "REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY}}",
-    "REACT_APP_API_ENDPOINT: ${{ secrets.REACT_APP_API_ENDPOINT}}"
-  },
   "eslintConfig": {
     "extends": [
       "react-app",
