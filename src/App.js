@@ -60,14 +60,8 @@ function App() {
             placeholder="Digite o texto aqui"
             required
           />
-          <input
-            type="text"
-            value={apiEndpoint}
-          />
-          <input
-            type="text"
-            value={apiKey}
-          />
+         <h2>endpoint: {apiEndpoint}</h2>
+         <h2>key: {apiKey}</h2>
           <button type="submit">Enviar</button>
         </form>
         {loading && <p>Loading...</p>}
