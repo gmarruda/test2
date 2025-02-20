@@ -9,8 +9,8 @@ function App() {
   const [displayText, setDisplayText] = useState(''); // New state for displaying text
   const audioRef = useRef(null);
 
-  const apiEndpoint = process.env.api_endpoint;
-  const apiKey = process.env.api_key;
+  const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
+  const apiKey = process.env.REACT_APP_API_KEY;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -60,8 +60,8 @@ function App() {
             placeholder="Digite o texto aqui"
             required
           />
-         <h2>endpoint: {apiEndpoint}</h2>
-         <h2>key: {apiKey}</h2>
+        <h2>Endpoint: {apiEndpoint || "Not Found"}</h2>
+        <h2>Key: {apiKey || "Not Found"}</h2>
           <button type="submit">Enviar</button>
         </form>
         {loading && <p>Loading...</p>}
