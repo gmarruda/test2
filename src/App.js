@@ -51,16 +51,18 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Entre com o texto a ser falado:</h1>
+        <h2>Enter the text to be spoken</h2>
+        <h2>Entre com o texto a ser falado</h2>
+        <h2>Introduzca el texto que se va a pronunciar</h2>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder="Digite o texto aqui"
+            placeholder="Text / Texto"
             required
           />
-          <button type="submit">Enviar</button>
+          <button type="submit">Submit / Enviar</button>
         </form>
         {loading && <p>Loading...</p>}
         {audioUrl && (
