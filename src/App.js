@@ -51,9 +51,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h2>Enter the text to be spoken</h2>
-        <h2>Entre com o texto a ser falado</h2>
-        <h2>Introduzca el texto que se va a pronunciar</h2>
+        <h1>Gustavo Migliorini Arruda: TTS Cloud Native Solution</h1>
+        <h2>🇬🇧🇺🇸 Enter the text to be spoken</h2>
+        <h2>🇵🇹🇧🇷 Entre com o texto a ser falado</h2>
+        <h2>🇪🇸 Introduzca el texto que se va a pronunciar</h2>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
