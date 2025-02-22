@@ -40,6 +40,7 @@ function App() {
   };
 
   useEffect(() => {
+    document.title = "Gustavo Migliorini Arruda: TTS Cloud Native Solution";
     const audioElement = audioRef.current;
     if (audioElement) {
       audioElement.addEventListener('ended', () => {
