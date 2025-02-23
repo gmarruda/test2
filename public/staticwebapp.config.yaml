@@ -1,0 +1,4 @@
+routes:
+  - route: "/*"
+    headers:
+      X-Robots-Tag: "noindex, nofollow"
