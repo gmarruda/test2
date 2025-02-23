@@ -48,7 +48,3 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ORANGE_FOREST_0C029E603 }}
           action: "close"
-routes:
-- route: "/*"
-  headers:
-    X-Robots-Tag: noindex, nofollow
